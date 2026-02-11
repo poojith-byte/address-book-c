@@ -1,0 +1,328 @@
+// #include<stdio.h>
+// #include<string.h>
+// int main(){
+// char premail[20];
+// scanf("%s",premail);
+// char *mail[]={"@gmail.","@outlook.","@yahoo."};
+// int i=0,c=0,d;
+// char domine[20];
+// while(premail[i]!='@'){
+//             if(premail[i]>='a'&& premail[i]<='z' || premail[i]>='0' && premail[i]<='9'){
+//                 c++;
+//             }
+//             else{
+//                 return 0;
+//             }
+//             i++;
+//         }
+//         d=c;
+// if(c>=6){
+//     while(premail[d]!='.'){
+//         d++;
+//     }
+//     if(premail[d]=='\0'){
+//         return 0;
+//     }
+// }
+
+// i=0;
+// while(c<=d){
+//     domine[i]=premail[c];
+//     i++;
+//     c++;
+// }
+// for(i=0;*mail[i]!='\0';i++)
+// {
+// if(!strcmp(domine,mail[i])){
+//     int len = strlen(premail);
+//     if (len >= 4 && strcmp(&premail[len - 4], ".com") == 0) {
+//     return 1;
+// }
+// }
+// else{
+//     return 0;
+// }
+
+// }
+// }
+#include<stdio.h>
+#include<string.h>
+int main(){
+    int i=0;
+    int exit=0; 
+    int n,index,v;
+    printf("enter name or phone number or email \nexit to exit from search\n");
+    do{
+    char str[50];
+    scanf(" %[^\n]",str);
+    if(strcmp(str,"exit")){
+        return;
+    }
+    if(str[0]>='0'&&str[0]<='9'){
+         v=validatephone(str);
+            if(v==1)
+            {
+                index = search_by_number(str,addressBook);
+                if(index == -1)
+                {
+                    printf("Contact not found. Please enter the correct phone number.\n");
+                   
+                }
+                else
+                {   
+                    print(index,addressBook);
+                    exit=1;
+                }
+            }
+            else
+            {
+                printf("enter a valid phone number.\n");
+            }
+            break;
+    }
+    while(str[i]!='\0'){
+        if(str[i]=='@'){
+            if(validateemail(str)){
+                index=search_by_mail(str,addressBook);
+                if(index == -1){
+                    printf("enter a valid mail id\n");
+                }
+                else{
+                    print(index,addressBook);
+                    exit=1;
+                }
+                
+            }
+            else{
+                printf("enter a valid mail id");
+            }
+            break;
+        }
+        else if(str[i]>='a'&&str[i]<='z' ||str[i]>='A'&&str[i]<='Z' ){
+            n++;
+        }
+
+        i++;
+    }
+    if(str[n]=='\0'){
+        v=validatename(str);
+            if(v==1){
+                index = search_by_name(str,addressBook);
+                if(index == -1){
+                    printf("Contact not found. Please enter the correct name.\n");
+                }
+                else{
+                    print(index,addressBook);
+                    exit=1;
+                }
+            }
+        exit=1;
+    }else{
+        printf("enter a correct name or phone number or email\n");
+    }
+
+    }while(exit!=1);
+}
+-------------------------------------------------------
+
+what ever u enter it will search 
+--------------------------------------------
+printf("enter name or phone number or email \nexit to exit from search\n");
+        int exi=0; 
+        do{
+        char str[50];
+        int i=0;
+        
+        int n,index,v,email_isther;
+        scanf(" %[^\n]",str);
+        if(!strcmp(str,"exit")){
+            return;
+        }
+        if(str[0]>='0'&&str[0]<='9'){
+            v=validatephone(str);
+                if(v==1)
+                {
+                    index = search_by_number(str,addressBook);
+                    if(index == -1)
+                    {
+                        printf("Contact not found. Please enter the correct phone number.\n");
+                    
+                    }
+                    else
+                    {   
+                        print(index,addressBook);
+                        exi=1;
+                    }
+                }
+                else
+                {
+                    printf("enter a valid phone number.\n");
+                }
+                
+        }
+        else{
+        while(str[i]!='\0')
+        {
+            if(str[i]=='@')
+            {   
+                email_isther =1;
+                break;   
+            }
+            i++;
+        }
+        if(email_isther==1){
+                if(validateemail(str))
+                {
+                    index=search_by_mail(str,addressBook);
+                    if(index == -1)
+                    {
+                        printf("enter a valid mail id\n");
+                    }
+                    else
+                    {
+                        print(index,addressBook);
+                        exi=1;
+                    }
+                    
+                }
+                else
+                {
+                    printf("enter a valid mail id");
+                }
+            }
+        else
+        {
+            v=validatename(str);
+                if(v==1){
+                    index = search_by_name(str,addressBook);
+                    if(index == -1){
+                        printf("Contact not found. Please enter the correct name.\n");
+                    }
+                    else{
+                        print(index,addressBook);
+                        exi=1;
+                       
+                    }
+                }
+           
+        }
+        }
+        }while(exi!=1);
+
+
+-------------------------------------------------
+
+delete by what ever u enter
+-------------------------------------------
+
+void deleteContact(AddressBook *addressBook)
+{
+	printf("enter name or phone number or email \n(exit to exit from Delete)\n");
+        int exi=0; 
+        do{
+        char str[50];
+        int i=0;
+        char yes;
+        
+        int n,index,v,email_isther;
+        scanf(" %[^\n]",str);
+        if(!strcmp(str,"exit")){
+            return;
+        }
+        if(str[0]>='0'&&str[0]<='9'){
+            v=validatephone(str);
+                if(v==1)
+                {
+                    index = search_by_number(str,addressBook);
+                    if(index == -1)
+                    {
+                        printf("Contact not found. Please enter the correct phone number.\n");
+                    
+                    }
+                    else
+                    {   printf("are you sure you want to delete(y/n) \n");
+                        getchar();
+                        scanf(" %c",&yes);
+                        if(yes == 'y'){
+                            del(index,addressBook);
+                        exi=1;}
+                        else{
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    printf("enter a valid phone number.\n");
+                }
+                
+        }
+        else{
+        while(str[i]!='\0')
+        {
+            if(str[i]=='@')
+            {   
+                email_isther =1;
+                break;   
+            }
+            i++;
+        }
+        if(email_isther==1){
+                if(validateemail(str))
+                {
+                    index=search_by_mail(str,addressBook);
+                    if(index == -1)
+                    {
+                        printf("enter a valid mail id\n");
+                    }
+                    else
+                    {printf("are u sure u want to delete(y/n) \n");
+                        getchar();
+                        scanf(" %c",&yes);
+                        if(yes == 'y')
+                        {
+                        del(index,addressBook);
+                        exi=1;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    printf("enter a valid mail id");
+                }
+            }
+        else
+        {
+            v=validatename(str);
+                if(v==1){
+                    index = search_by_name(str,addressBook);
+                    if(index == -1){
+                        printf("Contact not found. Please enter the correct name.\n");
+                    }
+                    else{
+                        printf("are u sure u want to delete(y/n) \n");
+                        getchar();
+                        scanf(" %c",&yes);
+                        if(yes == 'y')
+                        {
+                        del(index,addressBook);
+                        exi=1;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                       
+                    }
+                }
+           
+        }
+        }
+        }while(exi!=1);}
+   
+
